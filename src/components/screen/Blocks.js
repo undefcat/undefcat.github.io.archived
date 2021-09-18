@@ -1,11 +1,12 @@
 import Block from './Block'
 
-function Blocks({ blockCount }) {
-  const blocks = new Array(blockCount)
-    .fill(0)
-    .map((_, i) => <Block key={i} />)
+function Blocks({ blocks }) {
+  const screenBlocks = blocks.map((block, idx) => (
+    <Block key={idx} block={block} />
+  ))
+
   return (
-    <div className="blocks">{blocks}</div>
+    <div className="blocks">{screenBlocks}</div>
   )
 }
 

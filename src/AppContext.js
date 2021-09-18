@@ -9,9 +9,9 @@ const generateBlocks = (blocks, block) => new Array(blocks)
   .map(() => generateBlock(block))
 
 export const defaultWalls = {
-  'left-wall': generateBlocks(9, 6),
-  'center-wall': generateBlocks(9, 9),
-  'right-wall': generateBlocks(9, 6),
+  'left-wall': generateBlocks(8, 13),
+  'center-wall': generateBlocks(8, 23),
+  'right-wall': generateBlocks(8, 12),
 }
 
 export default createContext({

@@ -1,13 +1,17 @@
+import { useContext } from 'react'
 import Wall from './Wall'
+import AppContext from '../../AppContext'
 
-function Screen({ color }) {
+function Screen() {
+  const { walls } = useContext(AppContext)
+
   return (
     <div id="wrap">
       <div className="background" id="ground" />
       <div id="walls">
-        <Wall id="center-wall" blocks={8} block={23} />
-        <Wall id="left-wall" blocks={8} block={13} />
-        <Wall id="right-wall" blocks={8} block={12} />
+        <Wall id="center-wall" blocks={walls['center-wall']} />
+        <Wall id="left-wall" blocks={walls['left-wall']} />
+        <Wall id="right-wall" blocks={walls['right-wall']} />
       </div>
 
       <div className="background" id="pillars" />
