@@ -30,8 +30,8 @@
 .block {
     position: relative;
     display: inline-block;
-    width: 100px;
-    height: 60px;
+    width: 50px;
+    height: 30px;
     margin-bottom: -1px;
 }
 
@@ -51,32 +51,32 @@
 #left-wall {
     position: absolute;
     bottom: 390px;
-    left: 128px;
+    left: 105px;
     perspective: 600px;
 }
 
 #left-wall .blocks {
-    transform: rotateX(1deg) rotateY(29deg);
+    transform: rotateX(.6deg) rotateY(52deg);
 }
 
 #center-wall {
     positioN: absolute;
-    left: 510px;
-    top: 160px;
+    left: 410px;
+    bottom: 393px;
     perspective: 600px;
 }
 
 #center-wall .blocks {
-    transform: translateZ(-90px);
+    transform: translateZ(-230px);
 }
 
 #right-wall {
     position: absolute;
-    bottom: 386px;
-    right: 132px;
+    bottom: 392px;
+    right: 102px;
     perspective: 600px;
 }
 
 #right-wall .blocks {
-    transform: rotateX(-1deg) rotateY(-29deg);
+    transform: rotateX(-.6deg) rotateY(-49deg);
 }
