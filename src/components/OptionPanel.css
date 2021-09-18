@@ -1,9 +1,8 @@
 #option {
     position: absolute;
     top: 0;
-    right: 0;
-    height: 100vh;
-    padding: 30px;
+    width: 100vw;
+    padding: 10px;
     background-color: #ffffff;
     box-shadow: -3px 10px 5px 5px rgba(0, 0, 0, .2);
 }
