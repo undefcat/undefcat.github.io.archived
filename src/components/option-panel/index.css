@@ -10,3 +10,7 @@
 #option.hide {
     display: none;
 }
+
+#option section {
+    display: inline-block;
+}

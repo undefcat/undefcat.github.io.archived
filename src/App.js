@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import AppContext, { defaultWalls } from './AppContext'
-import Screen from './components/Screen'
-import OptionPanel from './components/OptionPanel'
+import Screen from './components/screen'
+import OptionPanel from './components/option-panel'
 
 function App() {
   const [walls, setWalls] = useState(defaultWalls)
