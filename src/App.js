@@ -62,6 +62,11 @@ function App() {
     }
 
     window.addEventListener('keydown', handler)
+    window.addEventListener('beforeunload', e => {
+      e.preventDefault()
+
+      e.returnValue = ''
+    })
 
     return () => {
       window.removeEventListener('keydown', handler)
