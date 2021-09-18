@@ -8,36 +8,53 @@ function App() {
   const [walls, setWalls] = useState(defaultWalls)
   const [showConfig, setShowConfig] = useState(false)
   const [color, setColor] = useState({
-    r: 255, g: 255, b: 255, a: .5,
+    r: 0, g: 0, b: 0, a: .5,
   })
 
   const handleChangeColor = color => {
     setColor(color.rgb)
   }
 
-  const setWall = (id, blocks, block, color) => {
-    if (walls.hasOwnProperty(id)) {
-      throw new Error(`${id} walls 값이 존재하지 않습니다.`)
+  const setWall = (wallId, blocksId, blockId) => {
+    if (!walls.hasOwnProperty(wallId)) {
+      throw new Error(`${wallId} 값이 존재하지 않습니다.`)
     }
 
-    const wall = walls[id]
-    const newWall = wall[blocks].map((block, idx) => {
-      if (idx !== block) {
-        return block
+    const blocks = walls[wallId]
+    const newBlocks = blocks[blocksId].map((c, idx) => {
+      if (idx !== blockId) {
+        return c
       }
 
-      return color
+      // 색깔이 채워져 있지 않은 상태면 채운다
+      if (!c.fill) {
+        return { ...color, fill: true }
+      }
+
+      const isSame = (c.r === color.r)
+        && (c.g === color.g)
+        && (c.b === color.b)
+        && (c.a === color.a)
+
+      // 색깔이 채워져 있는 경우
+      // 같은 색인지 확인하고
+      // 같은 색이면 색깔을 지운다
+      if (isSame) {
+        return { ...c, a: 0, fill: false }
+      }
+
+      // 이전과 다른 색이면 색깔 바꾼다.
+      return { ...color }
     })
 
-    setWalls({
-      ...walls,
-      [id]: newWall,
-    })
+    blocks.splice(blocksId, 1, newBlocks)
+
+    setWalls({...walls})
   }
 
   useEffect(() => {
     const handler = e => {
-      if (e.code !== 'KeyC') {
+      if (e.code !== 'KeyQ') {
         return
       }
 
