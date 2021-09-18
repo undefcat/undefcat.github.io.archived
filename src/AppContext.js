@@ -2,9 +2,7 @@ import { createContext } from 'react'
 
 const generateBlock = block => new Array(block)
   .fill(0)
-  .map(() => {
-    return { r: 255, g: 255, b: 255, a: 0 }
-  })
+  .map(() => ({ r: 255, g: 255, b: 255, a: 0 }))
 
 const generateBlocks = (blocks, block) => new Array(blocks)
   .fill(0)
