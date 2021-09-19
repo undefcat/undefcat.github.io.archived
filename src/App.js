@@ -13,6 +13,73 @@ const isSameColor = (a, b) => a.r === b.r
   && a.b === b.b
   && a.a === b.a
 
+const createUpdateBlock = (target, color) => {
+  // 색깔이 채워져 있지 않은 상태면 채운다
+  if (!target.fill) {
+    return { ...color, fill: true }
+  }
+
+  // 색깔이 채워져 있는 경우
+  // 같은 색인지 확인하고
+  // 같은 색이면 색깔을 지운다
+  if (isSameColor(target, color)) {
+    return { ...target, a: 0, fill: false }
+  }
+
+  // 이전과 다른 색이면 색깔 바꾼다.
+  return { ...color, fill: true }
+}
+
+const useShowConfigPanelEffect = setShowConfig => useEffect(() => {
+  const handler = e => {
+    if (e.code !== 'KeyQ') {
+      return
+    }
+
+    setShowConfig(prev => !prev)
+  }
+
+  window.addEventListener('keydown', handler)
+  window.addEventListener('beforeunload', e => {
+    e.preventDefault()
+
+    e.returnValue = ''
+  })
+
+  return () => {
+    window.removeEventListener('keydown', handler)
+  }
+}, [setShowConfig])
+
+const useSetFillTypeEffect = setFillType => useEffect(() => {
+  const keyDownHandler = e => {
+    switch (e.key) {
+      case 'Shift':
+        setFillType(FILL_TYPE_ROW)
+        return
+
+      case 'Alt':
+        setFillType(FILL_TYPE_COLUMN)
+        return
+
+      default:
+        setFillType(FILL_TYPE_DEFAULT)
+    }
+  }
+
+  const keyUpHandler = () => {
+    setFillType(FILL_TYPE_DEFAULT)
+  }
+
+  window.addEventListener('keydown', keyDownHandler)
+  window.addEventListener('keyup', keyUpHandler)
+
+  return () => {
+    window.removeEventListener('keydown', keyDownHandler)
+    window.removeEventListener('keyup', keyUpHandler)
+  }
+}, [setFillType])
+
 function App() {
   const [walls, setWalls] = useState(createDefaultWalls())
   const [showConfig, setShowConfig] = useState(false)
@@ -23,46 +90,6 @@ function App() {
 
   const handleChangeColor = color => {
     setColor(color.rgb)
-  }
-
-  const createUpdateBlock = (target, color) => {
-    // 색깔이 채워져 있지 않은 상태면 채운다
-    if (!target.fill) {
-      return { ...color, fill: true }
-    }
-
-    // 색깔이 채워져 있는 경우
-    // 같은 색인지 확인하고
-    // 같은 색이면 색깔을 지운다
-    if (isSameColor(target, color)) {
-      return { ...target, a: 0, fill: false }
-    }
-
-    // 이전과 다른 색이면 색깔 바꾼다.
-    return { ...color, fill: true }
-  }
-
-  const trigger = (wallId, blocksId, blockId) => {
-    if (!walls.hasOwnProperty(wallId)) {
-      throw new Error(`${wallId} 값이 존재하지 않습니다.`)
-    }
-
-    switch (fillType) {
-      case FILL_TYPE_DEFAULT:
-        fillDefault(wallId, blocksId, blockId)
-        return
-
-      case FILL_TYPE_ROW:
-        fillRow(wallId, blocksId, blockId)
-        return
-
-      case FILL_TYPE_COLUMN:
-        fillColumn(wallId, blocksId, blockId)
-        return
-
-      default:
-        fillDefault(wallId, blocksId, blockId)
-    }
   }
 
   const fillDefault = (wallId, blocksId, blockId) => {
@@ -113,60 +140,35 @@ function App() {
     setWalls(newWalls)
   }
 
+  const trigger = (wallId, blocksId, blockId) => {
+    if (!walls.hasOwnProperty(wallId)) {
+      throw new Error(`${wallId} 값이 존재하지 않습니다.`)
+    }
+
+    switch (fillType) {
+      case FILL_TYPE_DEFAULT:
+        fillDefault(wallId, blocksId, blockId)
+        return
+
+      case FILL_TYPE_ROW:
+        fillRow(wallId, blocksId, blockId)
+        return
+
+      case FILL_TYPE_COLUMN:
+        fillColumn(wallId, blocksId, blockId)
+        return
+
+      default:
+        fillDefault(wallId, blocksId, blockId)
+    }
+  }
+
   const resetWall = () => {
     setWalls(createDefaultWalls())
   }
 
-  useEffect(() => {
-    const handler = e => {
-      if (e.code !== 'KeyQ') {
-        return
-      }
-
-      setShowConfig(prev => !prev)
-    }
-
-    window.addEventListener('keydown', handler)
-    window.addEventListener('beforeunload', e => {
-      e.preventDefault()
-
-      e.returnValue = ''
-    })
-
-    return () => {
-      window.removeEventListener('keydown', handler)
-    }
-
-  }, [])
-
-  useEffect(() => {
-    const keyDownHandler = e => {
-      switch (e.key) {
-        case 'Shift':
-          setFillType(FILL_TYPE_ROW)
-          return
-
-        case 'Alt':
-          setFillType(FILL_TYPE_COLUMN)
-          return
-
-        default:
-          setFillType(FILL_TYPE_DEFAULT)
-      }
-    }
-
-    const keyUpHandler = () => {
-      setFillType(FILL_TYPE_DEFAULT)
-    }
-
-    window.addEventListener('keydown', keyDownHandler)
-    window.addEventListener('keyup', keyUpHandler)
-
-    return () => {
-      window.removeEventListener('keydown', keyDownHandler)
-      window.removeEventListener('keyup', keyUpHandler)
-    }
-  }, [setFillType])
+  useShowConfigPanelEffect(setShowConfig)
+  useSetFillTypeEffect(setFillType)
 
   const provideValue = {
     walls,
