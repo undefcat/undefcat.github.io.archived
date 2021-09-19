@@ -1,10 +1,9 @@
-import { useContext } from 'react'
-import AppContext from '../../../AppContext'
 import Walls from './Walls'
+import { useAppContext } from '../../../common/useAppContext'
 import './index.css'
 
 function MiniMap() {
-  const ctx = useContext(AppContext)
+  const ctx = useAppContext()
   const walls = []
 
   for (const key in ctx.walls) {

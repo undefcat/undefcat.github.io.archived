@@ -1,9 +1,8 @@
-import { useContext } from 'react'
 import Block from './Block'
-import AppContext from '../../../AppContext'
+import { useAppContext } from '../../../common/useAppContext'
 
 function Blocks({ wallId, blocksId, blocks }) {
-  const { setWall } = useContext(AppContext)
+  const { setWall } = useAppContext()
 
   const b = blocks.map((color, idx) => (
     <Block

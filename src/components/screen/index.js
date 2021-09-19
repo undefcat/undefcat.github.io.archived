@@ -1,9 +1,8 @@
-import { useContext } from 'react'
 import Wall from './Wall'
-import AppContext from '../../AppContext'
+import { useAppContext } from '../../common/useAppContext'
 
 function Screen() {
-  const { walls } = useContext(AppContext)
+  const { walls } = useAppContext()
 
   return (
     <div id="wrap">
