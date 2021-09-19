@@ -1,5 +1,6 @@
 import ColorPicker from './color-picker'
 import MiniMap from './mini-map'
+import Buttons from './buttons'
 import './index.css'
 
 function OptionPanel({ color, onChangeColor, visible }) {
@@ -10,6 +11,7 @@ function OptionPanel({ color, onChangeColor, visible }) {
         color={color}
         onChange={onChangeColor}
       />
+      <Buttons />
     </div>
   )
 }
