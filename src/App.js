@@ -172,7 +172,7 @@ function App() {
 
   const provideValue = {
     walls,
-    setWall: trigger,
+    trigger,
     resetWall,
   }
 

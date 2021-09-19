@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-function Block({ wallId, blocksId, id, color, setWall }) {
+function Block({ wallId, blocksId, id, color, trigger }) {
   const {r, g, b, a} = color
 
   const backgroundColor = `rgba(${r},${g},${b},${a})`
@@ -10,12 +10,12 @@ function Block({ wallId, blocksId, id, color, setWall }) {
       return
     }
 
-    setWall(wallId, blocksId, id)
-  }, [wallId, blocksId, id, setWall])
+    trigger(wallId, blocksId, id)
+  }, [wallId, blocksId, id, trigger])
 
   const handleMouseDown = useCallback(() => {
-    setWall(wallId, blocksId, id)
-  }, [wallId, blocksId, id, setWall])
+    trigger(wallId, blocksId, id)
+  }, [wallId, blocksId, id, trigger])
 
   return (
     <div

@@ -16,6 +16,6 @@ export const createDefaultWalls = () => ({
 
 export default createContext({
   walls: createDefaultWalls(),
-  setWall: () => {},
+  trigger: () => {},
   resetWall: () => {},
 })

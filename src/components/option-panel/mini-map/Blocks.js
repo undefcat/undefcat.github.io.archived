@@ -2,7 +2,7 @@ import Block from './Block'
 import { useAppContext } from '../../../common/useAppContext'
 
 function Blocks({ wallId, blocksId, blocks }) {
-  const { setWall } = useAppContext()
+  const { trigger } = useAppContext()
 
   const b = blocks.map((color, idx) => (
     <Block
@@ -11,7 +11,7 @@ function Blocks({ wallId, blocksId, blocks }) {
       blocksId={blocksId}
       id={idx}
       color={color}
-      setWall={setWall}
+      trigger={trigger}
     />
   ))
 
