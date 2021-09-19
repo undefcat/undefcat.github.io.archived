@@ -13,7 +13,7 @@ function ResetButton() {
   }
 
   return (
-    <button onClick={handleOnClick}>초기화</button>
+    <button onClick={handleOnClick}>칠해진 벽 색상 초기화</button>
   )
 }
 
