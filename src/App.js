@@ -99,7 +99,7 @@ function App() {
         return c
       }
 
-      return createUpdateBlock(c, color);
+      return createUpdateBlock(c, color)
     })
 
     blocks.splice(blocksId, 1, newBlocks)
@@ -113,7 +113,7 @@ function App() {
     const updated = createUpdateBlock(clicked, color)
 
     const newBlocks = blocks[blocksId]
-      .map(() => ({ ...updated }));
+      .map(() => ({ ...updated }))
 
     blocks.splice(blocksId, 1, newBlocks)
 

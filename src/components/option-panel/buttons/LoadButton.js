@@ -10,7 +10,7 @@ function LoadButton() {
       return
     }
 
-    const file = files[0];
+    const file = files[0]
     const reader = new FileReader()
 
     reader.onload = e => {
