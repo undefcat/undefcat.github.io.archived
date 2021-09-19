@@ -8,13 +8,14 @@ const generateBlocks = (blocks, block) => new Array(blocks)
   .fill(0)
   .map(() => generateBlock(block))
 
-export const defaultWalls = {
+export const createDefaultWalls = () => ({
   'left-wall': generateBlocks(8, 13),
   'center-wall': generateBlocks(8, 23),
   'right-wall': generateBlocks(8, 12),
-}
+})
 
 export default createContext({
-  walls: defaultWalls,
+  walls: createDefaultWalls(),
   setWall: () => {},
+  resetWall: () => {},
 })

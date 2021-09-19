@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import AppContext, { defaultWalls } from './AppContext'
+import AppContext, { createDefaultWalls } from './AppContext'
 import Screen from './components/screen'
 import OptionPanel from './components/option-panel'
 
 function App() {
-  const [walls, setWalls] = useState(defaultWalls)
+  const [walls, setWalls] = useState(createDefaultWalls())
   const [showConfig, setShowConfig] = useState(false)
   const [color, setColor] = useState({
     r: 0, g: 0, b: 0, a: .5,
@@ -52,6 +52,10 @@ function App() {
     setWalls({...walls})
   }
 
+  const resetWall = () => {
+    setWalls(createDefaultWalls())
+  }
+
   useEffect(() => {
     const handler = e => {
       if (e.code !== 'KeyQ') {
@@ -75,7 +79,7 @@ function App() {
   }, [])
 
   return (
-    <AppContext.Provider value={{ walls, setWall }}>
+    <AppContext.Provider value={{ walls, setWall, resetWall }}>
       <Screen
         color={color}
       />
