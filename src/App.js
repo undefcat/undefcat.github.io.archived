@@ -163,7 +163,7 @@ function App() {
     }
   }
 
-  const resetWall = () => {
+  const resetWalls = () => {
     setWalls(createDefaultWalls())
   }
 
@@ -173,8 +173,8 @@ function App() {
   const provideValue = {
     walls,
     trigger,
-    setWall: setWalls,
-    resetWall,
+    setWalls,
+    resetWalls,
   }
 
   return (

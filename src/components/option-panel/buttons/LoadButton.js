@@ -1,7 +1,7 @@
 import { useAppContext } from '../../../common/useAppContext'
 
 function LoadButton() {
-  const { setWall } = useAppContext()
+  const { setWalls } = useAppContext()
 
   const handleChange = e => {
     const { files } = e.target
@@ -20,7 +20,7 @@ function LoadButton() {
         const json = JSON.parse(result)
         const { walls } = json[0]
 
-        setWall(walls)
+        setWalls(walls)
 
       } catch (e) {
         alert('파일을 읽을 수 없습니다.. ㅠ_ㅠ 파일이 깨진 것 같습니다.')
